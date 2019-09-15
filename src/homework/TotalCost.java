@@ -1,13 +1,13 @@
 package homework;
 
-class TotalCost {
+public class TotalCost {
     private int totalCost;
 
-    int getTotalCost() {
+    public int getTotalCost() {
         return totalCost;
     }
 
-    void setTotalCost(int totalCost) {
+    public void setTotalCost(int totalCost) {
         this.totalCost = totalCost;
     }
 }
