@@ -9,7 +9,8 @@ public class Add {
         this.points = points;
     }
 
-    public synchronized void applyOperation(TotalCost totalCost) {
+    public synchronized void applyOperation(TotalCost totalCost, String thread) {
+        System.out.println("Ресурс Add используется процессом " + thread);
         totalCost.setTotalCost(totalCost.getTotalCost() + points);
     }
 }

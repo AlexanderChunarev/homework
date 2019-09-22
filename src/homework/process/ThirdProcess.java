@@ -4,22 +4,23 @@ import homework.TotalCost;
 import homework.resource.Multiply;
 import homework.resource.Withdraw;
 
-public class ThirdProcess extends Thread {
+public class ThirdProcess implements Runnable {
     private final TotalCost totalCost;
     private Multiply multiplyResource;
     private Withdraw withdrawResource;
+    public Thread thread;
 
-    public ThirdProcess(TotalCost cost, int mulCoefficient, int withdrawPoints) {
-        this.totalCost = cost;
-        multiplyResource = new Multiply(mulCoefficient);
-        withdrawResource = new Withdraw(withdrawPoints);
+    public ThirdProcess(TotalCost totalCost, Multiply multiplyResource, Withdraw withdrawResource, String name) {
+        this.totalCost = totalCost;
+        this.multiplyResource = multiplyResource;
+        this.withdrawResource = withdrawResource;
+        thread = new Thread(this, name);
+        thread.start();
     }
 
     @Override
     public void run() {
-        synchronized (this) {
-            withdrawResource.applyOperation(totalCost);
-            multiplyResource.applyOperation(totalCost);
-        }
+        withdrawResource.applyOperation(totalCost, Thread.currentThread().getName());
+        multiplyResource.applyOperation(totalCost, Thread.currentThread().getName());
     }
 }
